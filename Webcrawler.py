@@ -2,12 +2,10 @@
 import requests
 # module that allows user to go through a website and sort through data you want
 from bs4 import BeautifulSoup
-import pandas as pd
-import numpy as np
 
 
 # create a function to crawl the Find Jobs site on Indeed
-def find_jobs_site_crawler(max_start_value):
+def find_jobs_page_crawler(max_start_value):
     start = 0
     while start <= max_start_value:
         url_to_scrape = "https://www.indeed.com/jobs?q=Data+Science+Summer+Intern&start=" + str(start)
@@ -32,9 +30,9 @@ def find_jobs_site_crawler(max_start_value):
 def single_job_data(job_title_url):
     source_code = requests.get(job_title_url)
     plain_text = source_code.text
-    soup = BeautifulSoup(plain_text, "lxml")
+    soup = BeautifulSoup(plain_text)
     for job_title in soup.findAll("div", {"class": "title"}):
         print(job_title.string)
 
 
-find_jobs_site_crawler(70)
+find_jobs_page_crawler(70)
