@@ -19,20 +19,22 @@ def find_jobs_page_crawler(max_start_value):
         for job_link in soup.findAll("a", {"class": "jobtitle turnstileLink visited"}):
             # get the urls of the job titles
             href = job_link.get("href")
+            # to get the name of the job
             job_title = job_link.string
             print(href)
             print(job_title)
-            single_job_data(href)
         start += 10
 
 
-# get info on one single job posting
-def single_job_data(job_title_url):
-    source_code = requests.get(job_title_url)
+# get employer data for single job posting
+def employer_info(employer_url):
+    source_code = requests.get(employer_url)
     plain_text = source_code.text
     soup = BeautifulSoup(plain_text)
-    for job_title in soup.findAll("div", {"class": "title"}):
-        print(job_title.string)
+    for employer in soup.findAll("a", {"class": "turnstileLink"}):
+        href = employer.get("href")
+        print(href)
 
 
 find_jobs_page_crawler(70)
+employer_info(href)
