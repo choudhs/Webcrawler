@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 def find_jobs_page_crawler(max_start_value):
     start = 0
     while start <= max_start_value:
-        url_to_scrape = "https://www.indeed.com/jobs?q=Data+Science+Summer+Intern&start=" + str(start)
+        url_to_scrape = "https://www.indeed.com/jobs?q=Summer+Data+Science+Internship&start=" + str(start)
         # request data from the url loaded above and store the results
         source_code = requests.get(url_to_scrape, allow_redirects=False)
         # take the text from the above requests and store it
